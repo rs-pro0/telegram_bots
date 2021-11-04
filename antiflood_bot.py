@@ -13,13 +13,13 @@ async def poll(message):
     try:
         print(message)
         try:
-            a = await bot.get_chat_member(message.chat.id, message["from"].id)
-            a = a["status"]
-            print(a)
+            chat_member = await bot.get_chat_member(message.chat.id, message["from"].id)
+            status = chat_member["status"]
+            print(status)
         except Exception as e:
             print(repr(e))
-            a = "member"
-        if a not in ["member", "restricted"] and "/poll" in message.text:
+            status = "member"
+        if status not in ["member", "restricted"] and "/poll" in message.text:
             await bot.delete_message(
                 chat_id=message.chat.id, message_id=message.message_id
             )
@@ -36,13 +36,13 @@ async def one(message):
 
     print(arr)
     try:
-        a = await bot.get_chat_member(message.chat.id, message["from"].id)
-        a = a["status"]
-        print(a)
+        chat_member = await bot.get_chat_member(message.chat.id, message["from"].id)
+        status = chat_member["status"]
+        print(status)
     except Exception as e:
         print(repr(e))
-        a = "member"
-    if a not in ["member", "restricted"]:
+        status = "member"
+    if status not in ["member", "restricted"]:
         return
     arr[message["from"].id] = message
     if message["from"].id in arr.keys():
